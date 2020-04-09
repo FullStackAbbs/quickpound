@@ -21,9 +21,12 @@ app.get('/', function(req, res) {
 });
 
 // PROFILE SECTION =========================
-app.get('/profile', isLoggedIn, function(req, res) { // a get request to GET information to produce the profile page ENDPOINT AND CALLBACK FUNCTION
-    let uId = ObjectId(req.session.passport.user// KEYWORD QUESTION: where andin which database can we find the collection of this peice of information) // this is the callback the renders the page AND goes to the database when the passport user is stored and grabs the OBJECT ID. THEN we define it as "let uID"
-    db.collection('posts').find({'posterId': uId}).toArray((err, result) => { //goes to our database that has a collection named post. Within collection /
+app.get('/profile', isLoggedIn, function(req, res) {
+  // a get request to GET information to produce the profile page ENDPOINT AND CALLBACK FUNCTION
+    let uId = ObjectId(req.session.passport.user)
+    // KEYWORD QUESTION: where andin which database can we find the collection of this peice of information) // this is the callback the renders the page AND goes to the database when the passport user is stored and grabs the OBJECT ID. THEN we define it as "let uID"
+    db.collection('posts').find({'posterId': uId}).toArray((err, result) => {
+      //goes to our database that has a collection named post. Within collection /
       // .find.... goes to the post collection and find posterId that match with the CURRENT uId. the posterId is supposed to link to the user
       if (err) return console.log(err) // if the information is not avaialable return an error
       res.render('profile.ejs', {
@@ -43,6 +46,8 @@ app.get('/feed', function(req, res) { // when the route /feed is called  the cal
       })
     })
 });
+
+
 
 // INDIVIDUAL POST PAGE =========================
 app.get('/post/:zebra', function(req, res) { //the get method awaits for a specfic post to be clicked on, when the post is clicked on
@@ -68,6 +73,8 @@ app.post('/qpPost', upload.single('file-to-upload'), (req, res, next) => { // th
     res.redirect('/profile') // redirect method can be applied once the sumbit button is hit
   })
 });
+
+
 
 // LOGOUT ==============================
 app.get('/logout', function(req, res) {
