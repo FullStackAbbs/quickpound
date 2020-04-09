@@ -3,6 +3,7 @@
 
       <div class="page-header text-center">
           <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+          // below is a route to log out of the system
           <a href="/logout" class="btn btn-default btn-sm">Logout</a>
       </div>
 
@@ -11,6 +12,7 @@
           <!-- LOCAL INFORMATION -->
           <div class="col-sm-6">
               <div class="well">
+                // the stores the profile Img of the specified
                   <h3><img src="<%= user.profileImg %>" alt=""> Local</h3>
 
                   <% if (user.local.email) { %>
@@ -30,13 +32,13 @@
           <div class="col-sm-6">
             <h3>Posts</h3>
             <ul>
-            <% for(var i=0; i<posts.length; i++) {%>
+            <% for(var i=0; i<posts.length; i++) {%> // this allows ALL the USER pictures to render
               <li>
-                <a href="/post/<%= posts[i]._id%>">
-                  <img src="<%= posts[i].imgPath%>">
+                <a href="/post/<%= posts[i]._id%>"> // takes the unique post ID for its own pictures
+                  <img src="<%= posts[i].imgPath%>"> // render the imgPath to be seen
                 </a>
-                <span><%= posts[i].caption %></span>
-                <span><%= posts[i].likes %></span>
+                <span><%= posts[i].caption %></span> // renders the caption for the picture
+                <span><%= posts[i].likes %></span> // renders the likes for the picture
                 <span><i class="fa fa-heart" aria-hidden="true"></i></span>
                 <span><i class="fa fa-trash" aria-hidden="true"></i></span>
               </li>
@@ -44,11 +46,14 @@
             </ul>
 
 
-          <h2>Add a post</h2>
+          <h2>Add a post</h2> // the section where we new entries in our collection
           <!-- IMAGE UPLOAD -->
-          <form action="/qpPost" enctype="multipart/form-data" method="post">
-             <input type="text" name="caption" value="">
-             <input type="file" name="file-to-upload">
+          <form action="/qpPost" enctype="multipart/form-data" method="post"> // KEYWORD QUESTION: multipart-form data and image path filinh ???
+            // the form action refers to our route line 60-70
+             <input type="text" name="caption" value=""> // NOTE: name is important as that is what is being saved to the collection
+
+             <input type="file" name="file-to-upload"> // the file being uploading to the database ???
+             // save the filepath in a keyvalue pair in the database
              <input type="submit" value="Upload">
            </form>
 
